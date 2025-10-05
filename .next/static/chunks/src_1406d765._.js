@@ -463,7 +463,7 @@ async function cashOnDelivery(cartid, form) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            token: token
+            token: token ? String(token) : ""
         },
         body: JSON.stringify({
             shippingAddress: form
@@ -483,7 +483,7 @@ async function online(cartid, form) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            token: token
+            token: token ? String(token) : ""
         },
         body: JSON.stringify({
             shippingAddress: form
