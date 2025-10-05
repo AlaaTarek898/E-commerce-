@@ -13,7 +13,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { CartContext } from '@/context/CartConetxt';
 import { deleteSpecificItem, UpdateSpecificItem } from '@/lib/services/cart.services';
 import Loading from '@/app/loading';
-import { ICartItem } from '@/lib/interfaces/cart';
+import { ICartResponse } from '@/lib/interfaces/cart';
 
 export default function Cart() {
   const cartContext = React.useContext(CartContext);
@@ -21,6 +21,9 @@ export default function Cart() {
   if (!cartContext) return <Loading />; 
 
   const { cartItems, setNoCartItems, setCartItems, setPrice, price } = cartContext;
+
+  // نوع محلي للـ product item بدل ICartItem
+  type CartProductItem = NonNullable<ICartResponse['data']>['products'][0];
 
   const handleDeleteProduct = async (id: string) => {
     const data = await deleteSpecificItem(id);
@@ -60,7 +63,7 @@ export default function Cart() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {cartItems.data.products.map((row: ICartItem) => (
+            {cartItems.data.products.map((row: CartProductItem) => (
               <TableRow key={row._id}>
                 <TableCell>
                   <div className="flex items-center gap-4">
