@@ -27,19 +27,24 @@ export default function NavBar() {
 
   return (
     <>
+      {/* Announcement Bar */}
       <div className='bg-black d-flex justify-center align-items-center w-full p-3'>
         <p className='text-white text-center'>
           Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! 
-          <Link href={'/Product'}>Shop now</Link>
+          <Link href={'/Products'} className="underline ml-1">Shop now</Link>
         </p>
       </div>
 
+      {/* Navbar */}
       <div className="navbar bg-base-100 shadow-sm">
         <div className='container flex justify-center m-auto'>
+
+          {/* Logo */}
           <div className="navbar-start">
             <Image src='/logo.png' width={100} height={100} alt='logo'/>
           </div>
 
+          {/* Links */}
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               {routes.map((item) => (
@@ -50,28 +55,34 @@ export default function NavBar() {
             </ul>
           </div>
 
+          {/* Right Side - Auth & Cart/Wishlist */}
           {session ? (
-            <div className="navbar-end">
+            <div className="navbar-end flex items-center gap-4">
               <div className='flex gap-3 justify-center items-center'>
-                <Link href={'/Cart'}>
-                  <small className='bg-black text-white rounded-full w-4 h-4 flex justify-center items-center'>
-                    {noCartItems}
-                  </small>
+                <Link href={'/Cart'} className="relative">
                   <ShoppingCartIcon />
+                  {noCartItems > 0 && (
+                    <small className='absolute -top-2 -right-2 bg-black text-white rounded-full w-4 h-4 flex justify-center items-center text-xs'>
+                      {noCartItems}
+                    </small>
+                  )}
                 </Link>
-                <Link href={'/WishList'}>
-                  <small className='bg-black text-white rounded-full w-4 h-4 flex justify-center items-center'>
-                    {noWishItems}
-                  </small>
+                <Link href={'/WishList'} className="relative">
                   <FavoriteIcon />
+                  {noWishItems > 0 && (
+                    <small className='absolute -top-2 -right-2 bg-black text-white rounded-full w-4 h-4 flex justify-center items-center text-xs'>
+                      {noWishItems}
+                    </small>
+                  )}
                 </Link>
               </div>
-              <Button className="btn" onClick={() => signOut({ redirect: true, callbackUrl: '/login' })}>
+
+              <Button className="btn" onClick={() => signOut({ redirect: true, callbackUrl: '/' })}>
                 Logout
               </Button>
             </div>
           ) : (
-            <div className="navbar-end">
+            <div className="navbar-end flex gap-2">
               <Link href={'/login'} className="btn">Login</Link>
               <Link href={'/register'} className="btn">Register</Link>
             </div>
