@@ -41,7 +41,7 @@ export default function NavBar() {
 
           {/* Logo */}
           <div className="navbar-start">
-            <Image src='/logo.png' width={100} height={100} alt='logo'/>
+            <Image src='/Logo.png' width={100} height={100} alt='logo'/>
           </div>
 
           {/* Links */}
