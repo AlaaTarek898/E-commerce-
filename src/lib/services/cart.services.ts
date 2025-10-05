@@ -2,6 +2,10 @@ import GetMyToken from "@/app/Utilities/GetMyToken";
 
 export async function addToCart(productId: string) {
     const token = await GetMyToken();
+if (!token) {
+    console.error("No token found, cannot add to cart");
+    return;
+  }
 
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/cart', {
         method: 'POST',

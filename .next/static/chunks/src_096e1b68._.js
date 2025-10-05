@@ -117,6 +117,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$Utilities$2f$d
 ;
 async function addToCart(productId) {
     const token = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$Utilities$2f$data$3a$4c8dba__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["default"])();
+    if (!token) {
+        console.error("No token found, cannot add to cart");
+        return;
+    }
     const res = await fetch('https://ecommerce.routemisr.com/api/v1/cart', {
         method: 'POST',
         headers: {

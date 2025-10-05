@@ -4332,10 +4332,6 @@
     background-color: var(--background);
   }
 
-  .bg-base-100 {
-    background-color: var(--color-base-100);
-  }
-
   .bg-black {
     background-color: var(--color-black);
   }

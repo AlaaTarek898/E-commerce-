@@ -3,26 +3,38 @@
   "middleware": {
     "/": {
       "files": [
-        "server/edge/chunks/edge-wrapper_fa177864.js",
-        "server/edge/chunks/[root-of-the-server]__0ec2138a._.js",
-        "server/edge/chunks/turbopack-edge-wrapper_c4d3ef86.js"
+        "server/edge/chunks/_42644797._.js",
+        "server/edge/chunks/[root-of-the-server]__8978dbac._.js",
+        "server/edge/chunks/turbopack-edge-wrapper_41d9095f.js"
       ],
       "name": "middleware",
       "page": "/",
       "matchers": [
         {
-          "regexp": "^/.*$",
-          "originalSource": "/:path*"
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/checkOut(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/checkOut"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/Profile(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/Profile"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/Cart(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/Cart"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/WishList(\\\\.json)?[\\/#\\?]?$",
+          "originalSource": "/WishList"
         }
       ],
       "wasm": [],
       "assets": [],
       "env": {
-        "__NEXT_BUILD_ID": "KLdlKQpLfRVmhQIhJDmRN",
+        "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "U0JX4SlZJJb1LGuh+eDgjVoJpZB0CFsItdwSyAhmSWE=",
-        "__NEXT_PREVIEW_MODE_ID": "57f7e34e16363a44d0c6cec10e43d769",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "11edd855dc6885af61da62482dccffdd4a56e8cbe384fd469768da903f82706b",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "ddbe02d96051ceaa32ccf386f6ec65f1c13a4241f6b2d1ed2c40eb5a12117903"
+        "__NEXT_PREVIEW_MODE_ID": "dbc91dfd984089dad63156c4297788e9",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "cf510d29c88611917b4f262521b81914df72feab70450fc360206b5afe449947",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "078fcf55c0790cc7b650568677b7683eaf66621b36ff7a9c4d27ec5dfc7bd224"
       }
     }
   },
