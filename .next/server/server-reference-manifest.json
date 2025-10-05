@@ -3,7 +3,7 @@
     "0006d5513570e8170bf74c742cf75aa4d77a066a61": {
       "workers": {
         "app/Products/page": {
-          "moduleId": "[project]/.next-internal/server/app/Products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/Utilities/GetMyToken.tsx [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "moduleId": "26898",
           "async": false,
           "exportedName": "default",
           "filename": "src/app/Utilities/GetMyToken.tsx"
