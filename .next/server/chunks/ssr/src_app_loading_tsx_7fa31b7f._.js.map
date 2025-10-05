@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///D:/Alaa/NEXT/next/src/app/loading.tsx"],"sourcesContent":["export default function Loading() {\r\n  return (\r\n    <div className=\"loader m-auto h-dvh\"></div>\r\n\r\n  );\r\n}\r\n/* HTML: <div class=\"loader\"></div> */\r\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;;;;;;AAGnB,EACA,oCAAoC","debugId":null}}]
+}
