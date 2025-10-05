@@ -1,0 +1,18 @@
+{
+  "/(auth)/login/page": "/login",
+  "/(auth)/register/page": "/register",
+  "/About/page": "/About",
+  "/Cart/page": "/Cart",
+  "/ProductDetails/[id]/page": "/ProductDetails/[id]",
+  "/Product_category/page": "/Product_category",
+  "/Products/page": "/Products",
+  "/Profile/page": "/Profile",
+  "/WishList/page": "/WishList",
+  "/_not-found/page": "/_not-found",
+  "/allorders/page": "/allorders",
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/bestSelling/page": "/bestSelling",
+  "/checkOut/page": "/checkOut",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/"
+}

@@ -11,8 +11,20 @@
       "page": "/",
       "matchers": [
         {
-          "regexp": "^/.*$",
-          "originalSource": "/:path*"
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/checkOut{(\\\\.json)}?",
+          "originalSource": "/checkOut"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/Profile{(\\\\.json)}?",
+          "originalSource": "/Profile"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/Cart{(\\\\.json)}?",
+          "originalSource": "/Cart"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/WishList{(\\\\.json)}?",
+          "originalSource": "/WishList"
         }
       ],
       "wasm": [],
