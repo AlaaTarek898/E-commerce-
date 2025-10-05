@@ -1,0 +1,47 @@
+'use client'
+import { getAllProduct } from '@/lib/services/product.services'
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react'
+import Rating from '@mui/material/Rating';
+import { IProduct } from '@/lib/interfaces/product';
+import Link from 'next/link';
+import Products from '../Product/Product';
+
+
+export default  function BestSelling({items}:{ items?: number }) {
+  const [top, setTop] = useState<IProduct[] >([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await getAllProduct();
+
+      const sorted = data.sort((a, b) => {
+        const soldA = a.sold ?? -Infinity;
+        const soldB = b.sold ?? -Infinity;
+        return soldB - soldA;
+      });
+
+      setTop(sorted);
+    }
+
+    fetchData();
+  }, []);
+
+// console.log(sorted);
+
+  return (
+    <div className='w-11/12 m-auto mt-10'>
+        <div className=' flex justify-between items-center'>
+<p className="flex items-center text-2xl font-bold my-8">
+  <span className="w-5 h-10 rounded-l bg-red-500  mr-3" />
+  Best Selling Products
+</p>
+    <Link href={'/bestSelling'} className='bg-red-500 text-white px-2 py-3 rounded-xl h-fit items-baseline md:px-6 hover:cursor-pointer'>View All</Link>
+    </div>
+    <div className=''>
+   <Products data={top.slice(0, items ?? top.length)}/>
+    </div>
+    </div>
+   
+  )
+}

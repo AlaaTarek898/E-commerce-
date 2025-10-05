@@ -1,0 +1,14 @@
+'use server'
+import { decode } from 'next-auth/jwt'
+import { cookies } from 'next/headers'
+import React from 'react'
+
+export default async function GetMyToken() {
+    const session=(await cookies()).get('next-auth.session-token')?.value
+    const data=await decode({
+        token:session,
+        secret:process.env.AUTH_SECRET!
+       
+    })
+ return(data?.token)
+}
