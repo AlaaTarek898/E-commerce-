@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Slider from "./_components/Slider/Slider";
 import Category from "./_components/CategoryParent/Category/Category";
-import SubCategoryContainer from "./_components/CategoryParent/subCategory/subCategory";
+// import SubCategoryContainer from "./_components/CategoryParent/subCategory/subCategory";
 import BestSelling from "./_components/BestSelling/BestSelling";
 import Cover from "./_components/Cover/Cover";
 import Explore from "./_components/Explore/Explore";
