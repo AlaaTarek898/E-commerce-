@@ -1,7 +1,5 @@
 'use client'
-import { ICartResponse } from "@/lib/interfaces/cart";
 import { IWishListResponse } from "@/lib/interfaces/wishList";
-import { getLoggedCart } from "@/lib/services/cart.services";
 import { getLoggedWishList } from "@/lib/services/wishlist.services";
 import { createContext, useEffect, useState } from "react";
 
@@ -14,26 +12,19 @@ interface IWishListContext {
   setPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 
-
 export const WishList = createContext<IWishListContext | null>(null);
 
-
 export function WishListContextProvider({ children }: { children: React.ReactNode }) {
-const [noWishItems, setNoWishItems] = useState(0);
-const [wishItems, setWishItems] = useState<IWishListResponse | null>(null);
-// const [price, setPrice] = useState(0);
-
-
+  const [noWishItems, setNoWishItems] = useState(0);
+  const [wishItems, setWishItems] = useState<IWishListResponse | null>(null);
+  const [price, setPrice] = useState(0); 
 
   async function getWishListItems() {
-   
     const data = await getLoggedWishList();
-    //  console.log('data',data)
     if (data?.status === 'success') {
       setNoWishItems(data.count);
       setWishItems(data);
-    //   setPrice(data?.data?.totalCartPrice)
-
+      setPrice(data.data?.totalPrice ?? 0); // لو عندك totalPrice في wishlist
     }
   }
 
@@ -42,9 +33,8 @@ const [wishItems, setWishItems] = useState<IWishListResponse | null>(null);
   }, []);
 
   return (
- <WishList.Provider value={{ noWishItems, setNoWishItems, wishItems, setWishItems}}>
-  {children}
-</WishList.Provider>
-
+    <WishList.Provider value={{ noWishItems, setNoWishItems, wishItems, setWishItems, price, setPrice }}>
+      {children}
+    </WishList.Provider>
   );
 }

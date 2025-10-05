@@ -362,14 +362,15 @@ function WishListContextProvider(param) {
     _s();
     const [noWishItems, setNoWishItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const [wishItems, setWishItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    // const [price, setPrice] = useState(0);
+    const [price, setPrice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     async function getWishListItems() {
         const data = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$services$2f$wishlist$2e$services$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getLoggedWishList"])();
-        //  console.log('data',data)
         if ((data === null || data === void 0 ? void 0 : data.status) === 'success') {
+            var _data_data;
             setNoWishItems(data.count);
             setWishItems(data);
-        //   setPrice(data?.data?.totalCartPrice)
+            var _data_data_totalPrice;
+            setPrice((_data_data_totalPrice = (_data_data = data.data) === null || _data_data === void 0 ? void 0 : _data_data.totalPrice) !== null && _data_data_totalPrice !== void 0 ? _data_data_totalPrice : 0); // لو عندك totalPrice في wishlist
         }
     }
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
@@ -382,16 +383,18 @@ function WishListContextProvider(param) {
             noWishItems,
             setNoWishItems,
             wishItems,
-            setWishItems
+            setWishItems,
+            price,
+            setPrice
         },
         children: children
     }, void 0, false, {
         fileName: "[project]/src/context/WishListContext.tsx",
-        lineNumber: 45,
-        columnNumber: 2
+        lineNumber: 36,
+        columnNumber: 5
     }, this);
 }
-_s(WishListContextProvider, "jP9JJaud1IFlxtZCYBAFACky6FI=");
+_s(WishListContextProvider, "uhhKHgpV9h1+8Yu9ZhFsg2XFCgg=");
 _c = WishListContextProvider;
 var _c;
 __turbopack_context__.k.register(_c, "WishListContextProvider");

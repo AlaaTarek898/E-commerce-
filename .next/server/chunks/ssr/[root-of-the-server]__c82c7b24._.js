@@ -342,14 +342,13 @@ const WishList = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d
 function WishListContextProvider({ children }) {
     const [noWishItems, setNoWishItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [wishItems, setWishItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
-    // const [price, setPrice] = useState(0);
+    const [price, setPrice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     async function getWishListItems() {
         const data = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$services$2f$wishlist$2e$services$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getLoggedWishList"])();
-        //  console.log('data',data)
         if (data?.status === 'success') {
             setNoWishItems(data.count);
             setWishItems(data);
-        //   setPrice(data?.data?.totalCartPrice)
+            setPrice(data.data?.totalPrice ?? 0); // لو عندك totalPrice في wishlist
         }
     }
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
@@ -360,13 +359,15 @@ function WishListContextProvider({ children }) {
             noWishItems,
             setNoWishItems,
             wishItems,
-            setWishItems
+            setWishItems,
+            price,
+            setPrice
         },
         children: children
     }, void 0, false, {
         fileName: "[project]/src/context/WishListContext.tsx",
-        lineNumber: 45,
-        columnNumber: 2
+        lineNumber: 36,
+        columnNumber: 5
     }, this);
 }
 }),
