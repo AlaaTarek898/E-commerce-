@@ -509,37 +509,33 @@ function CheckOut() {
         phoneNumber: '',
         townCity: ''
     });
-    const route = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
+    const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     const { cartid, cartItems, setNoCartItems, setPrice, setCartid, setCartItems } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartConetxt$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CartContext"]);
     async function submit(e) {
         e.preventDefault();
+        if (!cartid) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].error('Cart is empty');
         if (payment === 'cash') {
             const res = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$services$2f$payment$2e$services$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cashOnDelivery"])(cartid, form);
             if (res?.status === 'success') {
+                // ✅ مسح الكارت بعد الدفع
                 setNoCartItems(0);
-                setCartItems([]);
+                setCartItems(null); // الكارت أصبح empty
                 setPrice(0);
-                setCartid();
-                route.push('/');
-                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].success('Orderd Placed Succeffly!');
+                setCartid(null);
+                router.push('/');
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].success('Order Placed Successfully!');
             }
         } else {
             const res = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$services$2f$payment$2e$services$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["online"])(cartid, form);
-            console.log(res);
             if (res?.status === 'success') {
-                location.href = res?.session?.url;
-            //     setNoCartItems(0)
-            //     setCartItems([])
-            //     setPrice(0)
-            //    setCartid()
+                location.href = res.session?.url;
             }
         }
     }
-    console.log(form);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "w-11/12 m-auto mt-10",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-            className: "flex flex-col justify-between md:flex-row",
+            className: "flex flex-col md:flex-row justify-between",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "w-full md:w-5/12",
@@ -549,7 +545,7 @@ function CheckOut() {
                             children: "Billing details"
                         }, void 0, false, {
                             fileName: "[project]/src/app/checkOut/page.tsx",
-                            lineNumber: 59,
+                            lineNumber: 55,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -567,7 +563,7 @@ function CheckOut() {
                                         })
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                    lineNumber: 61,
+                                    lineNumber: 57,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Input$2f$Input$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -581,7 +577,7 @@ function CheckOut() {
                                         })
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                    lineNumber: 62,
+                                    lineNumber: 58,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Input$2f$Input$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -595,7 +591,7 @@ function CheckOut() {
                                         })
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                    lineNumber: 63,
+                                    lineNumber: 59,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Input$2f$Input$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -609,35 +605,35 @@ function CheckOut() {
                                         })
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                    lineNumber: 64,
+                                    lineNumber: 60,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-full flex justify-center ",
+                                    className: "w-full flex justify-center",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         type: "submit",
-                                        className: "block text-center w-6/12 p-3 bg-red-400 text-white hover:bg-red-600 hover:cursor-pointer ",
+                                        className: "block text-center w-6/12 p-3 bg-red-400 text-white hover:bg-red-600 hover:cursor-pointer",
                                         children: "Place Order"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/checkOut/page.tsx",
-                                        lineNumber: 68,
-                                        columnNumber: 19
+                                        lineNumber: 63,
+                                        columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                    lineNumber: 67,
-                                    columnNumber: 20
+                                    lineNumber: 62,
+                                    columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/checkOut/page.tsx",
-                            lineNumber: 60,
+                            lineNumber: 56,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/checkOut/page.tsx",
-                    lineNumber: 58,
+                    lineNumber: 54,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -647,12 +643,12 @@ function CheckOut() {
                             className: "w-11/12",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$_components$2f$Cart$2f$Cart$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                                 fileName: "[project]/src/app/checkOut/page.tsx",
-                                lineNumber: 78,
+                                lineNumber: 73,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/checkOut/page.tsx",
-                            lineNumber: 77,
+                            lineNumber: 72,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -667,7 +663,7 @@ function CheckOut() {
                                             children: "Cart total"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/checkOut/page.tsx",
-                                            lineNumber: 86,
+                                            lineNumber: 79,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -677,23 +673,23 @@ function CheckOut() {
                                                     children: "Sub total"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                                    lineNumber: 89,
+                                                    lineNumber: 82,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     children: [
-                                                        cartItems?.data?.totalCartPrice,
+                                                        cartItems?.data?.totalCartPrice ?? 0,
                                                         " EGP"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                                    lineNumber: 90,
+                                                    lineNumber: 83,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/checkOut/page.tsx",
-                                            lineNumber: 88,
+                                            lineNumber: 81,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -703,20 +699,20 @@ function CheckOut() {
                                                     children: "Shipping"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                                    lineNumber: 94,
+                                                    lineNumber: 87,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     children: "Free"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                                    lineNumber: 95,
+                                                    lineNumber: 88,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/checkOut/page.tsx",
-                                            lineNumber: 93,
+                                            lineNumber: 86,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -726,23 +722,23 @@ function CheckOut() {
                                                     children: "Total"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                                    lineNumber: 99,
+                                                    lineNumber: 92,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     children: [
-                                                        cartItems?.data?.totalCartPrice,
+                                                        cartItems?.data?.totalCartPrice ?? 0,
                                                         " EGP"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                                    lineNumber: 100,
+                                                    lineNumber: 93,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/checkOut/page.tsx",
-                                            lineNumber: 98,
+                                            lineNumber: 91,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -755,81 +751,78 @@ function CheckOut() {
                                                             id: "cash",
                                                             type: "radio",
                                                             name: "payment",
-                                                            value: payment,
                                                             checked: payment === 'cash',
                                                             onChange: ()=>setPayment('cash')
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/checkOut/page.tsx",
-                                                            lineNumber: 105,
-                                                            columnNumber: 17
+                                                            lineNumber: 99,
+                                                            columnNumber: 21
                                                         }, this),
                                                         " Cash"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                                    lineNumber: 104,
-                                                    columnNumber: 15
+                                                    lineNumber: 98,
+                                                    columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                     htmlFor: "online",
-                                                    className: "",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                             id: "online",
                                                             type: "radio",
                                                             name: "payment",
-                                                            value: payment,
                                                             checked: payment === 'online',
                                                             onChange: ()=>setPayment('online')
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/checkOut/page.tsx",
-                                                            lineNumber: 108,
-                                                            columnNumber: 17
+                                                            lineNumber: 102,
+                                                            columnNumber: 21
                                                         }, this),
                                                         " Online"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                                    lineNumber: 107,
-                                                    columnNumber: 15
+                                                    lineNumber: 101,
+                                                    columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/checkOut/page.tsx",
-                                            lineNumber: 103,
-                                            columnNumber: 13
+                                            lineNumber: 97,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/checkOut/page.tsx",
-                                    lineNumber: 85,
+                                    lineNumber: 78,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/checkOut/page.tsx",
-                                lineNumber: 82,
+                                lineNumber: 77,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/checkOut/page.tsx",
-                            lineNumber: 81,
+                            lineNumber: 76,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/checkOut/page.tsx",
-                    lineNumber: 76,
+                    lineNumber: 71,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/checkOut/page.tsx",
-            lineNumber: 56,
+            lineNumber: 52,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/checkOut/page.tsx",
-        lineNumber: 55,
+        lineNumber: 51,
         columnNumber: 5
     }, this);
 }

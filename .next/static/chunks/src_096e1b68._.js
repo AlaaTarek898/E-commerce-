@@ -229,9 +229,9 @@ function CartContextProvider(param) {
             setNoCartItems(data.numOfCartItems);
             setCartItems(data);
             var _data_data_totalCartPrice;
-            setPrice((_data_data_totalCartPrice = (_data_data = data.data) === null || _data_data === void 0 ? void 0 : _data_data.totalCartPrice) !== null && _data_data_totalCartPrice !== void 0 ? _data_data_totalCartPrice : 0);
+            setPrice((_data_data_totalCartPrice = data === null || data === void 0 ? void 0 : (_data_data = data.data) === null || _data_data === void 0 ? void 0 : _data_data.totalCartPrice) !== null && _data_data_totalCartPrice !== void 0 ? _data_data_totalCartPrice : 0);
             var _data_cartId;
-            setCartid((_data_cartId = data.cartId) !== null && _data_cartId !== void 0 ? _data_cartId : null);
+            setCartid((_data_cartId = data === null || data === void 0 ? void 0 : data.cartId) !== null && _data_cartId !== void 0 ? _data_cartId : null);
         }
     }
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
@@ -245,15 +245,15 @@ function CartContextProvider(param) {
             cartItems,
             setCartItems,
             setNoCartItems,
-            cartid,
-            setCartid,
             price,
-            setPrice
+            setPrice,
+            cartid,
+            setCartid
         },
         children: children
     }, void 0, false, {
         fileName: "[project]/src/context/CartConetxt.tsx",
-        lineNumber: 40,
+        lineNumber: 41,
         columnNumber: 5
     }, this);
 }
