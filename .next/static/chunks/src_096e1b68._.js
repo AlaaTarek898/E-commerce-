@@ -121,52 +121,39 @@ async function addToCart(productId) {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            token: token
+            token: token ? String(token) : ""
         },
         body: JSON.stringify({
             productId
         })
     });
     const data = await res.json();
-    console.log(data);
-    if (data.status === 'success') {
-        return data;
-    } else {
-        console.log('error');
-    }
+    if (data.status === 'success') return data;
+    console.log('error');
 }
 async function getLoggedCart() {
     const token = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$Utilities$2f$data$3a$4c8dba__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["default"])();
-    console.log(token);
     const res = await fetch("https://ecommerce.routemisr.com/api/v1/cart", {
         method: 'GET',
         headers: {
-            token: token
+            token: token ? String(token) : ""
         }
     });
     const data = await res.json();
-    // console.log(data)
-    if (data.status === 'success') {
-        return data;
-    } else {
-        console.log('error');
-    }
+    if (data.status === 'success') return data;
+    console.log('error');
 }
 async function deleteSpecificItem(productId) {
     const token = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$Utilities$2f$data$3a$4c8dba__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["default"])();
     const res = await fetch("https://ecommerce.routemisr.com/api/v1/cart/".concat(productId), {
         method: 'DELETE',
         headers: {
-            token: token
+            token: token ? String(token) : ""
         }
     });
     const data = await res.json();
-    // console.log(data)
-    if (data.status === 'success') {
-        return data;
-    } else {
-        console.log('error');
-    }
+    if (data.status === 'success') return data;
+    console.log('error');
 }
 async function UpdateSpecificItem(param) {
     let { productId, count } = param;
@@ -175,7 +162,7 @@ async function UpdateSpecificItem(param) {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
-            token: token
+            token: token ? String(token) : ""
         },
         body: JSON.stringify({
             productId,
@@ -183,12 +170,8 @@ async function UpdateSpecificItem(param) {
         })
     });
     const data = await res.json();
-    // console.log(data)
-    if (data.status === 'success') {
-        return data;
-    } else {
-        console.log('error');
-    }
+    if (data.status === 'success') return data;
+    console.log('error');
 }
 _c = UpdateSpecificItem;
 var _c;
@@ -284,16 +267,12 @@ async function getLoggedWishList() {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            token: token
+            token: token ? String(token) : ""
         }
     });
     const data = await res.json();
-    // console.log(data)
-    if (data.status === 'success') {
-        return data;
-    } else {
-        console.log('error');
-    }
+    if (data.status === 'success') return data;
+    console.log('error');
 }
 async function addToWishList(productId) {
     const token = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$Utilities$2f$data$3a$4c8dba__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["default"])();
@@ -301,19 +280,15 @@ async function addToWishList(productId) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            token: token
+            token: token ? String(token) : ""
         },
         body: JSON.stringify({
-            productId: productId
+            productId
         })
     });
     const data = await res.json();
-    // console.log(data)
-    if (data.status === 'success') {
-        return data;
-    } else {
-        console.log('error');
-    }
+    if (data.status === 'success') return data;
+    console.log('error');
 }
 async function deleteFromWishList(productId) {
     const token = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$Utilities$2f$data$3a$4c8dba__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["default"])();
@@ -321,19 +296,12 @@ async function deleteFromWishList(productId) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-            token: token
-        },
-        body: JSON.stringify({
-            productId: productId
-        })
+            token: token ? String(token) : ""
+        }
     });
     const data = await res.json();
-    // console.log(data)
-    if (data.status === 'success') {
-        return data;
-    } else {
-        console.log('error');
-    }
+    if (data.status === 'success') return data;
+    console.log('error');
 }
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -370,7 +338,7 @@ function WishListContextProvider(param) {
             setNoWishItems(data.count);
             setWishItems(data);
             var _data_data_totalPrice;
-            setPrice((_data_data_totalPrice = (_data_data = data.data) === null || _data_data === void 0 ? void 0 : _data_data.totalPrice) !== null && _data_data_totalPrice !== void 0 ? _data_data_totalPrice : 0); // لو عندك totalPrice في wishlist
+            setPrice((_data_data_totalPrice = (_data_data = data.data) === null || _data_data === void 0 ? void 0 : _data_data.totalPrice) !== null && _data_data_totalPrice !== void 0 ? _data_data_totalPrice : 0);
         }
     }
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({

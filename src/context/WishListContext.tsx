@@ -24,7 +24,7 @@ export function WishListContextProvider({ children }: { children: React.ReactNod
     if (data?.status === 'success') {
       setNoWishItems(data.count);
       setWishItems(data);
-      setPrice(data.data?.totalPrice ?? 0); // لو عندك totalPrice في wishlist
+      setPrice(data.data?.totalPrice ?? 0); 
     }
   }
 
