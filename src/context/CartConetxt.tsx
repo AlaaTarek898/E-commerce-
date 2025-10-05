@@ -2,11 +2,16 @@
 import { ICartResponse } from "@/lib/interfaces/cart";
 import { getLoggedCart } from "@/lib/services/cart.services";
 import { createContext, useEffect, useState } from "react";
-import { set } from "zod";
 
-interface ICartContext {
+export interface ICartContext {
   noCartItems: number;
   cartItems: ICartResponse | null;
+  setNoCartItems: (num: number) => void;
+  setCartItems: (cart: ICartResponse) => void;
+  price: number;
+  setPrice: (price: number) => void;
+  cartid: string | null;
+  setCartid: (id: string | null) => void;
 }
 
 export const CartContext = createContext<ICartContext | null>(null);
@@ -14,20 +19,16 @@ export const CartContext = createContext<ICartContext | null>(null);
 export function CartContextProvider({ children }: { children: React.ReactNode }) {
   const [noCartItems, setNoCartItems] = useState(0);
   const [cartItems, setCartItems] = useState<ICartResponse | null>(null);
-    const [price, setPrice] = useState(0);
-    const [cartid, setCartid] = useState(null);
-
+  const [price, setPrice] = useState(0);
+  const [cartid, setCartid] = useState<string | null>(null);
 
   async function getCartItems() {
-   
     const data = await getLoggedCart();
-    //  console.log('data',data)
     if (data?.status === 'success') {
       setNoCartItems(data.numOfCartItems);
       setCartItems(data);
-      setPrice(data?.data?.totalCartPrice
-)
-setCartid(data?.cartId)
+      setPrice(data.data?.totalCartPrice ?? 0);
+      setCartid(data.cartId ?? null);
     }
   }
 
@@ -36,7 +37,9 @@ setCartid(data?.cartId)
   }, []);
 
   return (
-    <CartContext.Provider value={{ noCartItems, cartItems ,setCartItems,setNoCartItems,cartid ,setCartid ,price,setPrice}}>
+    <CartContext.Provider
+      value={{ noCartItems, cartItems, setCartItems, setNoCartItems, cartid, setCartid, price, setPrice }}
+    >
       {children}
     </CartContext.Provider>
   );

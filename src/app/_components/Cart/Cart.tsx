@@ -7,106 +7,123 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { ICartResponse } from '@/lib/interfaces/cart';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CartContext, CartContextProvider } from '@/context/CartConetxt';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { CartContext } from '@/context/CartConetxt';
 import { deleteSpecificItem, UpdateSpecificItem } from '@/lib/services/cart.services';
 import Loading from '@/app/loading';
+import { ICartItem } from '@/lib/interfaces/cart';
 
 export default function Cart() {
-    const [loading, setLoading] = React.useState(true);
+  const cartContext = React.useContext(CartContext);
 
-   const{cartItems,setNoCartItems,setCartItems,setPrice}= React.useContext(CartContext)
+  if (!cartContext) return <Loading />; 
 
-     const handleDeleteProduct=async(id:string)=>{
-      const data=await deleteSpecificItem(id)
-          if (data?.status === 'success') {
+  const { cartItems, setNoCartItems, setCartItems, setPrice, price } = cartContext;
+
+  const handleDeleteProduct = async (id: string) => {
+    const data = await deleteSpecificItem(id);
+    if (data?.status === 'success') {
       setNoCartItems(data.numOfCartItems);
       setCartItems(data);
-      setPrice(data?.data?.totalCartPrice
-)
-     }
+      setPrice(data.data?.totalCartPrice ?? 0);
     }
-  const handleUpdateProduct=async({productId,count}:{productId:string,count:number})=>{
-      const data=await UpdateSpecificItem({productId,count})
-          if (data?.status === 'success') {
+  };
+
+  const handleUpdateProduct = async ({ productId, count }: { productId: string; count: number }) => {
+    if (count < 1) return; // منع العدادات من النزول للصفر
+    const data = await UpdateSpecificItem({ productId, count });
+    if (data?.status === 'success') {
       setNoCartItems(data.numOfCartItems);
       setCartItems(data);
-      setPrice(data?.data?.totalCartPrice
-)
-     }
+      setPrice(data.data?.totalCartPrice ?? 0);
     }
+  };
 
+  if (!cartItems) return <Loading />;
 
-//    console.log(cartItems?.data?.products)
-    return (<>
-        {!cartItems?(<Loading/>):
-        cartItems.data?.products?.length === 0 ?(<p>no items add</p>):
-       (<div className=' container'>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className='w-3/12 '>Product</TableCell>
-                            <TableCell align="center" className='w-3/12'>Price</TableCell>
-                            <TableCell align="center" className='w-2/12'>Quantity</TableCell>
-                            <TableCell align="center" className='w-3/12'>SubTotal</TableCell>
-                                <TableCell align="center" className='w-3/12'>Remove</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {cartItems?.data?.products.map((row) => (
-                          
-                            <TableRow
-                                key={row._id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row" className='\'>
-                                    <div className='flex items-center'>
-                                        <Image src={row.product.imageCover} alt={row.product.title} width={80} height={80} />
+  if (!cartItems.data?.products || cartItems.data.products.length === 0)
+    return <p className="text-center mt-10">No items added</p>;
 
-                                        <p className=' font-bold'>{row.product.title}</p>
-                                    </div>
-                                </TableCell>
-                                <TableCell align="center" ><p>{row.price} EGY</p></TableCell>
-                                <TableCell align="center" >
-                                    <div className=' flex '>
-                                        <button onClick={()=> handleUpdateProduct({productId:row.product._id,count:row.count+1})
-                                        } className='px-3 py-1 border-2 border-gray-400 w-3/12 text-center flex justify-center items-center'>+</button>
-                                        <div className='px-3 py-1  border-2 border-gray-400 w-5/12  text-center'>{row.count}</div>
-                                        <button onClick={()=> handleUpdateProduct({productId:row.product._id,count:row.count-1})} className='px-3 py-1 border-2 border-gray-400 w-3/12  text-center flex justify-center items-center'>-</button>
-                                    </div>
-                                </TableCell>
-                                <TableCell align="center" ><p>{row.price * row.count}</p></TableCell>
-                                <TableCell align="center" ><button className='px-3 py-1 border-none w-3/12  text-center flex justify-center items-center hover:cursor-pointer'onClick={()=>(handleDeleteProduct(row.product._id))}> <DeleteForeverIcon/> </button></TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            {/* <div className=' flex justify-between mt-3'>
-                <div className=' border-2 border-gray-300 p-3 h-fit'>
-                    <Link href='/Products'>Back to shop</Link>
-                </div>
-               <div className='mt-3 border-2 border-gray-300 w-4/12 p-3 float-right  '>
-                <p className='text-2xl'>Cart total</p>
-                <div className=' flex justify-between  m-3 border-b-2'><p>Sub total</p> <p>{cartItems?.data?.totalCartPrice}EGY</p></div>
-<div className=' flex justify-between  m-3 border-b-2'><p>Shipping</p> <p>free</p></div>
-                
-       
-       
-                <div className=' flex justify-between  m-3 border-b-2'><p>Total</p> <p>{cartItems?.data?.totalCartPrice}EGY</p></div>
-     <div className='w-full flex justify-center'>
-       <Link href='/checkOut' className='block text-center w-6/12 p-3 bg-red-400 text-white hover:bg-red-600 hover:cursor-pointer  '>Procees to checkout</Link>
-</div>
+  return (
+    <div className="container mt-10">
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="cart table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Product</TableCell>
+              <TableCell align="center">Price</TableCell>
+              <TableCell align="center">Quantity</TableCell>
+              <TableCell align="center">SubTotal</TableCell>
+              <TableCell align="center">Remove</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {cartItems.data.products.map((row: ICartItem) => (
+              <TableRow key={row._id}>
+                <TableCell>
+                  <div className="flex items-center gap-4">
+                    <Image src={row.product.imageCover} alt={row.product.title} width={80} height={80} />
+                    <p className="font-bold">{row.product.title}</p>
+                  </div>
+                </TableCell>
+                <TableCell align="center">{row.price} EGY</TableCell>
+                <TableCell align="center">
+                  <div className="flex justify-center items-center">
+                    <button
+                      onClick={() => handleUpdateProduct({ productId: row.product._id, count: row.count + 1 })}
+                      className="px-3 py-1 border-2 border-gray-400 text-center"
+                    >
+                      +
+                    </button>
+                    <div className="px-3 py-1 border-2 border-gray-400 text-center w-12">{row.count}</div>
+                    <button
+                      onClick={() => handleUpdateProduct({ productId: row.product._id, count: row.count - 1 })}
+                      className="px-3 py-1 border-2 border-gray-400 text-center"
+                    >
+                      -
+                    </button>
+                  </div>
+                </TableCell>
+                <TableCell align="center">{row.price * row.count} EGY</TableCell>
+                <TableCell align="center">
+                  <button
+                    className="px-3 py-1 flex justify-center items-center hover:cursor-pointer"
+                    onClick={() => handleDeleteProduct(row.product._id)}
+                  >
+                    <DeleteForeverIcon />
+                  </button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-            </div>
-            </div> */}
-           
-        </div>)}
-        </>
-    )
-
+      <div className="mt-6 flex justify-end">
+        <div className="border-2 border-gray-300 w-4/12 p-4">
+          <p className="text-2xl font-bold mb-4">Cart Total</p>
+          <div className="flex justify-between mb-2 border-b-2">
+            <span>Sub Total</span>
+            <span>{price} EGY</span>
+          </div>
+          <div className="flex justify-between mb-2 border-b-2">
+            <span>Shipping</span>
+            <span>Free</span>
+          </div>
+          <div className="flex justify-between mb-4 border-b-2">
+            <span>Total</span>
+            <span>{price} EGY</span>
+          </div>
+          <Link
+            href="/checkOut"
+            className="block text-center w-full p-3 bg-red-400 text-white hover:bg-red-600"
+          >
+            Proceed to Checkout
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 }
