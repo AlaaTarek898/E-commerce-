@@ -104,7 +104,7 @@ export default function Cart() {
         </Table>
       </TableContainer>
 
-      <div className="mt-6 flex justify-end">
+      {/* <div className="mt-6 flex justify-end">
         <div className="border-2 border-gray-300 w-4/12 p-4">
           <p className="text-2xl font-bold mb-4">Cart Total</p>
           <div className="flex justify-between mb-2 border-b-2">
@@ -126,7 +126,7 @@ export default function Cart() {
             Proceed to Checkout
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

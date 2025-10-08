@@ -29,9 +29,9 @@ export default function CheckOut() {
       const res = await cashOnDelivery(cartid, form);
 
       if (res?.status === 'success') {
-        // ✅ مسح الكارت بعد الدفع
+  
         setNoCartItems(0);
-        setCartItems(null); // الكارت أصبح empty
+        setCartItems(null); 
         setPrice(0);
         setCartid(null);
 
@@ -73,7 +73,7 @@ export default function CheckOut() {
             <Cart />
           </div>
 
-          <div className="container mt-5">
+          <div className="container mt-5 w-11/12">
             <div className="flex justify-between mt-3">
               <div className="mt-3 border-2 border-gray-300 w-full p-3">
                 <p className="text-2xl">Cart total</p>

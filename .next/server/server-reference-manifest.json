@@ -26,6 +26,12 @@
           "exportedName": "default",
           "filename": "src/app/Utilities/GetMyToken.tsx"
         },
+        "app/checkOut/page": {
+          "moduleId": "[project]/.next-internal/server/app/checkOut/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/Utilities/GetMyToken.tsx [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "default",
+          "filename": "src/app/Utilities/GetMyToken.tsx"
+        },
         "app/page": {
           "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/Utilities/GetMyToken.tsx [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
@@ -38,6 +44,7 @@
         "app/Cart/page": "action-browser",
         "app/Products/page": "action-browser",
         "app/_not-found/page": "action-browser",
+        "app/checkOut/page": "action-browser",
         "app/page": "action-browser"
       },
       "filename": "src/app/Utilities/GetMyToken.tsx",
