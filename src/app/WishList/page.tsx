@@ -5,7 +5,7 @@ import Products from '../_components/Product/Product'
 
 export default async function WishList() {
                 const wish:IWishListResponse= await getLoggedWishList()
-                console.log('wish',wish.data)
+                // console.log('wish',wish.data)
 
   return (
   <>
