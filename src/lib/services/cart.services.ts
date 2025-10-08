@@ -1,4 +1,4 @@
-import GetMyToken from "@/app/Utilities/GetMyToken";
+import  GetMyToken  from "@/app/Utilities/GetMyToken";
 
 export async function addToCart(productId: string) {
     const token = await GetMyToken();
