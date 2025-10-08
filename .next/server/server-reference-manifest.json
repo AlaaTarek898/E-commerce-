@@ -2,8 +2,20 @@
   "node": {
     "0006d5513570e8170bf74c742cf75aa4d77a066a61": {
       "workers": {
+        "app/About/page": {
+          "moduleId": "[project]/.next-internal/server/app/About/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/Utilities/GetMyToken.tsx [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "default",
+          "filename": "src/app/Utilities/GetMyToken.tsx"
+        },
         "app/Cart/page": {
           "moduleId": "[project]/.next-internal/server/app/Cart/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/Utilities/GetMyToken.tsx [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "default",
+          "filename": "src/app/Utilities/GetMyToken.tsx"
+        },
+        "app/Products/page": {
+          "moduleId": "[project]/.next-internal/server/app/Products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/Utilities/GetMyToken.tsx [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "default",
           "filename": "src/app/Utilities/GetMyToken.tsx"
@@ -22,7 +34,9 @@
         }
       },
       "layer": {
+        "app/About/page": "action-browser",
         "app/Cart/page": "action-browser",
+        "app/Products/page": "action-browser",
         "app/_not-found/page": "action-browser",
         "app/page": "action-browser"
       },

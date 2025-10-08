@@ -15,10 +15,10 @@ export default function Home() {
    <BestSelling items={4}/>
 <Cover/>
 <Explore/>
-<div className=" relative w-11/12 m-auto mt-10 h-[500px]">
+<div className=" relative w-10/12 m-auto mt-10 h-[500px]">
 <Image src="/cover2.png" alt="cover" fill />
 </div>
-<div className="w-11/12 m-auto mt-10 flex flex-col  justify-around md:flex-row">
+<div className="w-10/12 m-auto mt-10 flex flex-col  justify-around md:flex-row">
 <div className=" flex flex-col items-center justify-center">
   <Image src='/icon1.png'
   alt="icon1"
